@@ -1,0 +1,60 @@
+<div class="col-md-12 text-center">
+    <h1>회원가입</h1>
+</div>
+
+<div class="jumbotron row">
+    <div class="row">
+        <div class="col-sm-6">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= devise_error_messages! %>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <%= f.label "email", class: "control-label" %><br />
+                        <%= f.email_field :email, class: "form-control input-sm", size: "40", autofocus: true %>
+                        <span class="error small text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <%= f.label :password, class: "control-label"%><br />
+                        <% if @minimum_password_length %>
+                        <em>(<%= @minimum_password_length %> characters minimum)</em>
+                        <% end %><br />
+                        <%= f.password_field :password, class: "form-control input-sm", size: "20", autocomplete: "off" %>
+                        <span class="error small text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <%= f.label "password confirmation", class: "control-label"%><br />
+                        <%= f.password_field :password_confirmation, class: "form-control input-sm", size: "20", autocomplete: "off" %>
+                        <span class="error small text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                      <% if devise_mapping.rememberable? -%>
+                          <%= f.check_box :remember_me %>
+                          <%= f.label :remember_me %>
+                      <% end -%>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <%= f.button "Sign up", class: "btn btn-important" %>
+                    </div>
+                    <div class="col-sm-9">
+                      <br>
+                        <%= render "users/shared/links" %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div> 
+
+

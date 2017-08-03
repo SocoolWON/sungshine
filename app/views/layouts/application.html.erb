@@ -1,14 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
   <head>
     <title>Sungshine</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="Description" content=""/>
+    <meta name="Keywords" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://coffree.lemonstand.com/resources/coffree/img/logo.png?1483671106" type="image/png">
+    <link rel="icon" href="https://coffree.lemonstand.com/resources/coffree/img/logo.png?1483671106" type="image/png">
+    
+
+    <!-- Stylesheets -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:100,400,700' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//d2pm12cz12gs8x.cloudfront.net/store-coffree-54dbd2e9d457d/themes/coffree/resources/css/combined.css?1439155148">
+    <link rel="stylesheet" href="//d2pm12cz12gs8x.cloudfront.net/store-coffree-54dbd2e9d457d/themes/coffree/resources/css/custom.css?1426626652">
+
+    <style>
+        .header-home-left{
+            background: url( /resources/coffree/img/bgmain.jpg?1483671106 )no-repeat top center;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+        }
+        .contact-head{
+            background: url( /resources/coffree/img/contact.jpg?1483671106 )no-repeat top center;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+        }
+        .header-about{
+            background: url( /resources/coffree/img/contact.jpg?1483671106 )no-repeat top center;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+        }
+    </style>
   </head>
 
   <body>
+  <%= render partial: "/navbar/navbar" %>
     <%= yield %>
+  <%= render partial: "/footer/footer" %>
   </body>
 </html>

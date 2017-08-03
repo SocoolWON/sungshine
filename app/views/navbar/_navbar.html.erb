@@ -1,0 +1,33 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="nav-content">
+
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+    <a href="/" class="navbar-brand"><img src="//d2pm12cz12gs8x.cloudfront.net/store-coffree-54dbd2e9d457d/themes/coffree/resources/img/logo.png?1423872265"></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <li><a href="#">굉장한 추천</a></li>
+      <!-- <li><a href="//coffree.lemonstand.com/about">About</a></li> -->
+      <!-- <li><a href="//coffree.lemonstand.com/shop">Shop</a></li> -->
+      <li><a href="#">제품들</a></li>
+      <% if current_user %>
+      <li><a href="/users/sign_out" data-method="delete"><i class="fa fa-lock"></i> 로그아웃</a></li>
+      <% else %>
+      <li><a href="/users/sign_in"><i class="fa fa-lock"></i> 로그인</a></li>
+      <li><a href="/users/sign_up"><i class="fa fa-lock"></i> 회원가입</a></li>
+      <% end %>
+      <li id="mini-cart">  <a href="//coffree.lemonstand.com/cart"><i class="fa fa-shopping-cart"></i> 장바구니<span id="navbar-totals">(0)</span></a></a></li>
+          </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

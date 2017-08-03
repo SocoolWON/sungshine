@@ -1,0 +1,46 @@
+<div class="col-md-12 text-center">
+    <h1>로그인</h1>
+</div>
+
+<div class="jumbotron row">
+    <div class="row">
+        <div class="col-sm-6">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <%= f.label "email", class: "control-label" %><br />
+                        <%= f.email_field :email, class: "form-control input-sm", size: "40", autofocus: true %>
+                        <span class="error small text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <%= f.label :password, class: "control-label"%><br />
+                        <%= f.password_field :password, class: "form-control input-sm", size: "20", autocomplete: "off" %>
+                        <span class="error small text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                      <% if devise_mapping.rememberable? -%>
+                          <%= f.check_box :remember_me %>
+                          <%= f.label :remember_me %>
+                      <% end -%>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <%= f.button "Log in", class: "btn btn-important" %>
+                    </div>
+                    <div class="col-sm-9">
+                      <br>
+                        <%= render "users/shared/links" %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div> 
