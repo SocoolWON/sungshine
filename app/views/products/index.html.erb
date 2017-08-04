@@ -1,0 +1,45 @@
+<div class="jumbotron row content shop">
+
+  <div class="col-md-12 cat-list">
+    <div class="dropdown">
+      <button class="btn btn-drop dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+        <strong>Category:</strong> Subscription
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+         <li><a href="/category/non-subscription"><p>Non-subscription</p></a></li>
+         <li><a href="/category/subscription"><p>Subscription</p></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+     <div class="row">
+       <div class="col-md-12">
+         <% @products.each do |product| %>
+         <div class="shop-grid">
+            <div class="col-md-6 text-center">
+              <% if product.image_url? %>
+                <a href="/products/<%=product.id%>"> <%= image_tag product.image_url.url %> </a>
+              <% else %>
+                <img src="//d2pm12cz12gs8x.cloudfront.net/store-coffree-54dbd2e9d457d/uploaded/thumbnails/single_autox500-jpg-crop.png?1424218053" alt="One Bag">
+              <% end %>
+              <h2><%=product.title%></h2>
+              <p>
+               <%=product.price%> 
+                <sub>/KRW</sub>
+              </p>
+              <p><p><%=product.description%></p></p><br>
+              <a href="/product/one-bag" class="btn btn-important">장바구니 담기</a>
+            </div>
+         </div>
+         <% end %>
+
+        <div class="pagination-holder">
+        </div>
+
+       </div>
+     </div>
+  </div>
+
+</div> 

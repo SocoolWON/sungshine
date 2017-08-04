@@ -1,0 +1,35 @@
+<div class="jumbotron row content">
+  <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@product, html: {class: "form contact-forms", multipart: true})  do |f| %>
+        <div class="form contact-forms">
+          <div class="field-row" id="contact-form">
+            <%= f.label "카테고리", class: "control-label" %><br />
+            <%= f.text_field :category, class: "required md-input form-control", placeholder: "카테고리", autofocus: true %>
+            <span class="error"></span>
+
+            <%= f.label "제품명", class: "control-label" %><br />
+            <%= f.text_field :title, class: "required md-input form-control", placeholder: "제품명", autofocus: true %>
+            <span class="error"></span>
+
+            <%= f.label "가격", class: "control-label" %><br />
+            <%= f.text_field :price, class: "required md-input form-control", placeholder: "가격", autofocus: true %>
+            <span class="error"></span>
+
+            <%= f.label "태그", class: "control-label" %><br />
+            <%= f.text_field :feature, class: "required md-input form-control", placeholder: "태그", autofocus: true %>
+            <span class="error"></span>
+
+            <%= f.label "사용법", class: "control-label" %><br />
+            <%= f.text_area :description, class: "required md-input form-control", rows: "10", placeholder: "사용법", autofocus: true %>
+            <span class="error"></span>
+
+            <%= f.label "사진", class: "control-label" %><br />
+            <%= f.file_field :image_url, class: "required md-input form-control"%>
+            <%= f.hidden_field :admin_id, value: current_admin.id %>
+
+            <%= f.button '전송', class: "btn-important btn" %>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div> 

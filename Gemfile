@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "mini_magick"
+gem 'carrierwave', '~> 1.0'
 gem 'pry-rails', :group => :development
 
 gem 'faker', '~> 1.6', '>= 1.6.6'

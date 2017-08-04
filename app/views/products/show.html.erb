@@ -1,0 +1,69 @@
+<div class="jumbotron row text-center no-border">
+  <form  class="custom" onsubmit="return false" method="post" action="/product/one-bag">
+      <div class="row shop-product" id="shop-product">
+        <div>
+          
+<div class="col-md-7">
+  <div class="col-md-12 img-thumb">
+    <% if @product.image_url? %>
+      <%= image_tag @product.image_url.url %>
+    <% else %>
+      <img id="big-thumb" src="//d2pm12cz12gs8x.cloudfront.net/store-coffree-54dbd2e9d457d/uploaded/thumbnails/single_autoxauto-jpg-crop.png?1424219843" class="main-img" alt="">
+    <% end %>
+  </div>
+</div>
+
+<div class="col-md-5">
+  <div class="col-md-12">
+    <h1 class="uppercase"><%=@product.title%></h1> 
+    <h3 id="why"><%=@product.price%>
+        <sub>/KRW</sub>
+    </h3>
+    <hr>
+    <p><p><%=@product.description%></p></p>
+    <hr>
+  </div>
+    
+    
+  <div class="product-options col-md-6">
+    <p class="title" for="option-0">Bean</p>
+    <span class="col-md-12 custom-dropdown">
+      <select id="option-0" name="options[2]" class="select-option" data-ajax-handler="shop:product" data-ajax-update="#product-page=shop-product">
+              <option value="4" >Geo</option>
+              <option value="5" >Serene</option>
+              <option value="6" >Columbian</option>
+      </select>
+    </span>
+  </div>
+  
+    <br>
+    <input type="hidden" name="productId" value="8"/>
+
+    <div class="product-options col-md-6">
+      <p class="title" for="billing_plan">Billing plan</p>
+      <span class="col-md-12 custom-dropdown">
+        <select id="billing_plan" class="select_option" name="billing_plan"> 
+            <option value="">-- No subscription --</option>
+            <option value="1" >Monthly</option>
+            <option value="2" >Weekly</option>
+        </select>
+      </span>
+    </div>
+
+       <div class="add-cart-holder form-group col-md-12">
+           <a class="btn btn-important btn-add-cart " href="#" data-ajax-handler="shop:onAddToCart" data-ajax-update="#shop-product=shop-product, #mini-cart=shop-minicart-totals" data-ajax-extra-fields="subscribe=1, noFash=1">장바구니담기</a>
+           <a class="btn btn-important btn-add-cart " href="#" data-ajax-handler="shop:onAddToCart" data-ajax-update="#shop-product=shop-product, #mini-cart=shop-minicart-totals" data-ajax-extra-fields="subscribe=1, noFash=1">바로구매하기</a>
+      </div>
+
+      <% if current_admin %>
+        <%= link_to '수정하기', edit_product_path(@product) %>
+        <%= link_to '삭제하기', product_path(@product), method: :delete, data: {confirm: "Are you sure?"} %>
+      <% end %>
+          
+  </div>
+        </div>
+      </div>
+      </form>
+</div> 
+    
+

@@ -16,18 +16,26 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      <li><a href="#">굉장한 추천</a></li>
-      <!-- <li><a href="//coffree.lemonstand.com/about">About</a></li> -->
-      <!-- <li><a href="//coffree.lemonstand.com/shop">Shop</a></li> -->
-      <li><a href="#">제품들</a></li>
-      <% if current_user %>
-      <li><a href="/users/sign_out" data-method="delete"><i class="fa fa-lock"></i> 로그아웃</a></li>
-      <% else %>
-      <li><a href="/users/sign_in"><i class="fa fa-lock"></i> 로그인</a></li>
-      <li><a href="/users/sign_up"><i class="fa fa-lock"></i> 회원가입</a></li>
-      <% end %>
-      <li id="mini-cart">  <a href="//coffree.lemonstand.com/cart"><i class="fa fa-shopping-cart"></i> 장바구니<span id="navbar-totals">(0)</span></a></a></li>
-          </ul>
+        <li><a href="#">굉장한 추천</a></li>
+        <!-- <li><a href="//coffree.lemonstand.com/about">About</a></li> -->
+        <!-- <li><a href="//coffree.lemonstand.com/shop">Shop</a></li> -->
+        <li><a href="/products">제품들</a></li>
+        <% if current_admin %>
+          <li><a href="/products/new">등록</a></li>
+          <li><a href="">매출</a></li>
+        <% elsif current_user %>
+          <li><a href="/users/sign_out" data-method="delete"><i class="fa fa-lock"></i> 로그아웃</a></li>
+        <% else %>
+          <li><a href="/users/sign_in"><i class="fa fa-lock"></i> 로그인</a></li>
+          <li><a href="/users/sign_up"><i class="fa fa-lock"></i> 회원가입</a></li>
+        <% end %>
+        <li id="mini-cart">  <a href="//coffree.lemonstand.com/cart"><i class="fa fa-shopping-cart"></i> 장바구니<span id="navbar-totals">(0)</span></a></a></li>
+        <% if current_admin %>
+          <li><a>관리자 <%=current_admin.nickname%>님 접속중!</a></li>
+        <% elsif current_user %> 
+          <li><a>안녕하세요! <%=current_user.nickname%> 님!</a></li>
+        <% end %>
+      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
