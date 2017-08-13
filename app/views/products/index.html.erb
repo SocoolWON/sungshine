@@ -17,24 +17,23 @@
      <div class="row">
        <div class="col-md-12">
          <% @products.each do |product| %>
-         <div class="shop-grid">
-            <div class="col-md-6 text-center">
-              <% if product.image_url? %>
-                <a href="/products/<%=product.id%>"> <%= image_tag product.image_url.url %> </a>
-              <% else %>
-                <img src="//d2pm12cz12gs8x.cloudfront.net/store-coffree-54dbd2e9d457d/uploaded/thumbnails/single_autox500-jpg-crop.png?1424218053" alt="One Bag">
-              <% end %>
-              <h2><%=product.title%></h2>
-              <p>
-               <%=product.price%> 
-                <sub>/KRW</sub>
-              </p>
-              <p><p><%=product.description%></p></p><br>
-              <a href="/product/one-bag" class="btn btn-important">장바구니 담기</a>
-            </div>
-         </div>
+           <div class="shop-grid">
+              <div class="col-md-6 text-center">
+                <% if product.image_url? %>
+                  <a href="/products/<%=product.id%>"> <%= image_tag product.image_url.url %> </a>
+                <% else %>
+                  <img src="//d2pm12cz12gs8x.cloudfront.net/store-coffree-54dbd2e9d457d/uploaded/thumbnails/single_autox500-jpg-crop.png?1424218053" alt="One Bag">
+                <% end %>
+                <h2><%=product.title%></h2>
+                <p>
+                 <%=product.price%> 
+                  <sub>/KRW</sub>
+                </p>
+                <p><p><%=product.description%></p></p><br>
+                <%= link_to "장바구니 담기", lineitems_path(product_id: product), method: :post, :remote => true, class: "btn btn-important put_into_cart"%>
+              </div>
+           </div>
          <% end %>
-
         <div class="pagination-holder">
         </div>
 
@@ -43,3 +42,20 @@
   </div>
 
 </div> 
+
+<script>
+  $(document).ready(function(){
+    $('.put_into_cart').click(function(){ 
+      console.log('HI');
+      $.ajax({
+         
+      }).done(function(){
+        <% if @cart %>
+        var cart_items = <%= @cart.lineitems.length %>;         
+        console.log(cart_items);
+        <% end %>
+      });
+    });
+  })
+</script>
+

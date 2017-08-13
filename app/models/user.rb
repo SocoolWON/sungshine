@@ -10,4 +10,9 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :lineitems
+
+  protected
+    def confirmation_required?
+      false
+    end
 end

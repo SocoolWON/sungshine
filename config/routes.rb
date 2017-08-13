@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :lineitems, only: [:new, :create, :destroy]
   resources :products
   devise_for :admins
   devise_for :users

@@ -9,6 +9,7 @@ gem "mini_magick"
 gem 'carrierwave', '~> 1.0'
 gem 'pry-rails', :group => :development
 
+gem 'awesome_print', '~> 1.7'
 gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

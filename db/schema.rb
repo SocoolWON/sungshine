@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803184731) do
+ActiveRecord::Schema.define(version: 20170811103611) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "nickname"
@@ -30,6 +30,11 @@ ActiveRecord::Schema.define(version: 20170803184731) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -43,11 +48,14 @@ ActiveRecord::Schema.define(version: 20170803184731) do
   end
 
   create_table "lineitems", force: :cascade do |t|
+    t.integer  "quantity",   default: 1
     t.integer  "user_id"
     t.integer  "product_id"
     t.integer  "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "cart_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["cart_id"], name: "index_lineitems_on_cart_id"
     t.index ["order_id"], name: "index_lineitems_on_order_id"
     t.index ["product_id"], name: "index_lineitems_on_product_id"
     t.index ["user_id"], name: "index_lineitems_on_user_id"
