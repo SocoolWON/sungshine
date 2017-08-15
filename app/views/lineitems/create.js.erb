@@ -1,0 +1,3 @@
+$('#navbar-totals').remove(); 
+$('<span id="navbar-totals">' + '(<%=@cart.lineitems.length%>)' + '</span>').appendTo('.mini-cart');
+

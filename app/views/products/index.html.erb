@@ -30,7 +30,7 @@
                   <sub>/KRW</sub>
                 </p>
                 <p><p><%=product.description%></p></p><br>
-                <%= link_to "장바구니 담기", lineitems_path(product_id: product), method: :post, :remote => true, class: "btn btn-important put_into_cart"%>
+                <%= link_to "장바구니 담기", lineitems_path(product_id: product), data: {confirm: "장바구니에 추가하시겠어요?" }, method: :post, :remote => true, class: "btn btn-important into_cart"%>
               </div>
            </div>
          <% end %>
@@ -42,20 +42,3 @@
   </div>
 
 </div> 
-
-<script>
-  $(document).ready(function(){
-    $('.put_into_cart').click(function(){ 
-      console.log('HI');
-      $.ajax({
-         
-      }).done(function(){
-        <% if @cart %>
-        var cart_items = <%= @cart.lineitems.length %>;         
-        console.log(cart_items);
-        <% end %>
-      });
-    });
-  })
-</script>
-
