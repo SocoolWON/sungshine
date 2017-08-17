@@ -1,4 +1,5 @@
 class LineitemsController < ApplicationController
+  before_action :set_lineitem, only: [:destroy, :update]
   def new 
     @lineitem = Lineitem.new
   end
@@ -19,8 +20,19 @@ class LineitemsController < ApplicationController
     end
   end
 
+  def update_all
+    items = params[:items]
+    items.each do |i,v|
+      item = Lineitem.find_by(id: i)
+      item.quantity = v
+      item.save
+    end
+    redirect_to new_order_path
+  end
+
   def destroy
      @lineitem.destroy
+     @cart = current_cart
   end
 
   private
@@ -30,5 +42,8 @@ class LineitemsController < ApplicationController
 
     def set_lineitem
       @lineitem = Lineitem.find(params[:id])
+    end
+
+    def update_params
     end
 end

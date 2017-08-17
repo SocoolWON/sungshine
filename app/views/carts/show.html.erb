@@ -1,0 +1,133 @@
+<div class="jumbotron">
+  <h4 class="text-center">Your Cart</h4>
+  <%= form_for(@lineitem, url: "/update_all", remote: true) do |f| %>
+    <% @cart.lineitems.each do |product| %> 
+    <div class="container" id="lineitem_<%=product.id%>">
+      <div class="row content" >
+          <div id="cart-content">
+            <br>
+
+            <div class="col-md-12">
+                <div class="items-holder">
+                  <div class="row content" id="cart-items">
+                      <div class="col-sm-6">
+                        제품
+                      </div>
+                      <div class="col-sm-3">
+                        수량 
+                      </div>
+                      <div class="col-sm-3">
+                        1개 가격
+                      </div>
+                  </div>
+                  <div class="row" id="cart-row">
+                    <div class="col-sm-2" id="cart-img">
+                      <img src="<%=product.product.image_url.url%>" alt="One Bag">
+                    </div>
+                    <div class="row" id="align-middle">
+                      <div class="col-sm-4">
+                        <a href=""><%=product.product.category%></a>
+                        <p class="h6"><%=product.product.title%></p>
+                      </div>
+                      <div class="col-sm-2">
+                        <%= number_field(:lineitem, :quantity, in: 1..10, value: product.quantity, step: 1, class:"quantity", id: "product_id_#{product.product.id}"  ) %>
+                        <input type="hidden" value="<%=product.product.id%>"> 
+                      </div>
+                      <div class="col-sm-3" id="item-middle">
+                        <p class="col-sm-9">$<%=product.product.price%></p>
+                        <input type="hidden" id="item_price_<%=product.product.id%>" value="<%=product.product.price%>">
+                        <%= link_to lineitem_path(product), data: {confirm: "삭제하시겠습니까?"}, method: :DELETE, :remote => true ,class: "col-sm-3 item-close", id: "item-close-#{product.id}" do %>
+                          <i class="fa fa-times" id="remove-cart-item-<%=product.product.id%>"></i>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div> <!-- #cart-row ends here-->
+                </div> <!-- .items-holder ends here-->
+            </div>
+
+
+          </div> <!-- #cart-content ends here -->
+      </div>
+    </div>
+    <% end %>
+    <div class="container">
+      <div class="col-md-4 col-sm-12 col-xs-12" id="summary">
+        <p id="title-p-d">Order Summary</p>
+        <ul class="price-list list-group total_price">
+         <!-- <li class="list-group-item">Discount: $12.00</li> -->
+          <li class="list-group-item important" id="total_price">Total: $<%=@cart.total_price(@cart.id)%></li>
+        </ul>
+      </div>
+      <input type="text" class="form-control" id="coupon-code" name="coupon" placeholder="Coupon Code" value="" /><br><br>
+      <a class= "col-xs-12 btn btn-important solid btn-lg" id="submit"> 주문서 작성 </a>
+     <% end %>
+   </div>
+</div> 
+
+
+<script>
+  var total_price = <%=@cart.total_price(@cart.id)%>;
+  var item_value;
+  var item_id;
+  var item_price;
+  var items = {};
+  <% @cart.lineitems.each do |item| %>
+    items['<%=item.product.id%>'] = 1;
+  <% end %>
+  console.log(items);
+  console.log(total_price);
+
+  $(document).ready(function(){
+    $('.fa-times').click(function(){
+      item_id = $(this).attr('id');
+      item_id = Number(item_id.substr(17));
+      item_price = Number($('#item_price_'+item_id).val());
+      item_value = Number($('#product_id_'+item_id).val());
+      total_price -= Number( item_value * item_price);
+    });
+
+//Debug needed 
+    $('.quantity').click(function(){
+      item_id = $(this).attr('id');
+      item_id = Number(item_id.substr(11));
+      item_price = Number($('#item_price_'+item_id).val());
+      item_value = Number($('#product_id_'+item_id).val());
+
+      if ( items['item_id'] < item_value ) {
+        total_price += item_price;
+        console.log('PLUS'+ total_price);
+      } else if ( items['item_id'] > item_value ) {
+        total_price -= item_price;
+        console.log('minus'+ total_price);
+      } else if ( items['item_id'] == 1 ){
+        console.log( "@@@@@@ ALREADY Item value is 1 ");
+      } else {
+        console.log('something wrong');
+      }
+      items['item_id'] = item_value;
+
+      $('.total_price').empty(); 
+      $('<li class="list-group-item important" id="total_price">' + 'Total: $' + total_price + '</li>').appendTo('.total_price');
+    });
+
+
+// Update 
+
+    $('#submit').click(function(){
+      $.ajax({
+        method: "POST",
+        url: "/update_all",
+        data: { items: items },
+        headers: {
+              'X-CSRF-Token': '<%= form_authenticity_token.to_s %>'},
+        success: function(){
+          alert("Your schedule successfully submitted!");
+        },
+        error: function(){
+          alert("Error! please try again!");
+        }
+      });
+    });
+
+  });
+</script>

@@ -1,0 +1,6 @@
+$('#lineitem_'+ '<%=@lineitem.id%>').empty();
+$('#navbar-totals').remove(); 
+$('<span id="navbar-totals">' + '(<%=@cart.lineitems.length%>)' + '</span>').appendTo('.mini-cart');
+
+$('.total_price').empty(); 
+$('<li class="list-group-item important" id="total_price">' + 'Total: $' + total_price + '</li>').appendTo('.total_price');
