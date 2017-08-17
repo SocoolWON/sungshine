@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post '/update_all' => 'lineitems#update_all'
   resources :lineitems, only: [:new, :create, :destroy]
   resources :products
-  resources :orders, only: [:index, :new, :destroy]
+  resources :orders, only: [:index, :new, :destroy, :show, :create]
   devise_for :admins
   devise_for :users
   root 'home#index'

@@ -8,6 +8,7 @@ class CreateOrders < ActiveRecord::Migration[5.0]
       t.text :requirements
       t.decimal :total_price, precision: 10
       t.belongs_to :user
+      t.string :status
 
       t.timestamps
     end

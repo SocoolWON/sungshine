@@ -1,0 +1,155 @@
+<div class="row" id="checkout-row">
+  <div class="content">
+    <div id="checkout-page">
+      <div class="jumbotron">
+
+          <div class="row">
+
+            <div class="col-md-9">
+  
+
+                <div class="checkout-tab" id="shop-address">
+                  <div class="checkout-tab-bar row">
+                    <div class="col-md-6 columns">
+                      <p>
+                        <i class="fa fa-circle-thin"></i>
+                        받는사람 정보 
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="checkout-content checkout-open">
+                      <div id="address-form" class="row" >
+
+                          <%= form_for(@order) do |f| %> 
+                            <div class="col-md-12" style="padding-bottom: 0;">
+                              <div class="col-md-12 col-sm-12 col-lg-6">
+
+                                <p id="title-p-d">
+                                
+                                결제정보 받을 주소 
+                                  <span class="fa-stack" style="visibility:hidden;">
+                                        <i class="fa fa-square-o fa-stack-2x"></i>
+                                        <i class="fa fa-check fa-stack-1x"></i>
+                                      </span>
+                                </p>
+                                
+                                <div id="billing-info" class="row">
+                                  <div class="col-sm-6 form-group">
+                                    <label for="billing_firstName">받는 사람</label>
+                                    <%= f.text_field :receiver, class:"form-control", id:"billing_firstName",placeholder: "홍길동"%>
+                                    <span class="error small text-danger"></span>
+                                    
+                                  </div>
+                                  <div class="col-sm-6 form-group">
+                                    <label for="billing_phone">핸드폰</label>
+                                    <%= f.text_field :phone_number, class:"form-control", id:"billing_phone",placeholder: "010-0000-0000"%>
+                                    <span class="error small text-danger"></span>
+                                  </div>
+                                  <div class="col-sm-6 form-group">
+                                    <label for="billing_postalCode">우편번호</label>
+                                    <%= f.text_field :zip_code, class:"form-control", id:"billing_postalCode",placeholder: "000-000"%>
+                                    <span class="error small text-danger"></span>
+                                  </div>
+                                  <div class="col-sm-12 form-group">
+                                    <label for="billing_address">주소</label>
+                                    <%= f.text_field :address, class:"form-control",placeholder: "서울시 이태원로 세종대왕길 벤쿠버 빌딩 201호"%>
+                                    <span class="error small text-danger"></span>
+                                  </div>
+
+                                  <div class="col-sm-12 form-group">
+                                    <label for="billing_address">배송시 요구사항</label>
+                                    <%= f.text_area :requirements, class:"form-control",placeholder: "요구사항"%>
+                                    <%= f.hidden_field :user_id, :value => current_user.id %>
+                                    <%= f.hidden_field :total_price, :value => @cart.total_price(@cart.id)%>
+
+                                    <span class="error small text-danger"></span>
+                                  </div>
+                                  <div class="col-sm-12 form-group">
+                                    <%= f.submit "결제하기", class: " btn btn-important pull-right"%>
+                                    <span class="error small text-danger"></span>
+                                  </div>
+
+                                </div>
+                              </div>
+                            
+                              
+                            <% end %>
+
+                      </div>
+                    </div>
+                </div>
+
+                <div class="checkout-tab" id="shop-address">
+                  <div class="checkout-tab-bar row">
+                    <div class="col-md-6 columns">
+                      <p>
+                          <i class="fa fa-circle-thin"></i>
+                          결제정보 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+
+        <% @cart.lineitems.each do |item| %> 
+        <div class="col-md-3">
+          <div class="checkout-tab" id="shop-cart">
+            <div class="checkout-tab-bar row">
+              <div class="col-md-6 columns">
+                <p>Items</p>
+              </div>
+            </div>
+
+            <div class="checkout-content checkout-open">
+              <div class="row" id="cart-row">
+                <div class="col-sm-2" id="cart-img" style="padding:0;">
+                  <img src="<%=item.product.image_url.url%>" alt="One Bag">
+                </div>
+                <div class="col-sm-10" style="padding-right:0px;">
+                  <a href="/product/one-bag"><%=item.product.title%></a><br>
+                  <p class="h6"><%=item.product.category%></p>
+                  <p class="small">개수: <span class="pull-right"><%=item.quantity%> x $<%=item.product.price%></span></p>
+                  <p class="small">Total: <span class="pull-right">$<%= item.quantity * item.product.price%></span></p>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+
+          </div>
+        </div>
+        <% end %>
+
+        <div class="col-md-3">
+          <div class="checkout-tab" >
+            <div class="checkout-tab-bar row">
+              <div class="col-md-6 columns">
+                <p>결제 금액</p>
+              </div>
+            </div>
+
+            <div class="checkout-content checkout-open">
+              <hr>
+              <span class="text-right">
+                <% @cart.lineitems.each do |item|%>
+                  <p><strong><%=item.product.title%>:</strong> <i>$<%= item.product.price * item.quantity%></i></p>
+                <% end %>
+                <p><strong>할인 적용:</strong> <i>-$00.00</i></p>
+                <p><strong>쿠폰 적용:</strong> <i>-$0.00</i></p>
+                <p><strong>세금:</strong> <i>$0.00</i></p>
+                <p class="subtotal"><strong>합계:</strong>  <i>$<%=@cart.total_price(@cart.id)%></i></p>
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>  
+</div> 
+
