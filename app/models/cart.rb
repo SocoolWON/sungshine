@@ -6,7 +6,7 @@ class Cart < ApplicationRecord
     cart = Cart.find_by_id(cart_id)
     if cart 
       cart.lineitems.each do |item|
-        @sum += item.product.price
+        @sum += item.product.price * item.quantity
       end
     end
     return @sum

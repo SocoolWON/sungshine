@@ -71,11 +71,13 @@
   var item_id;
   var item_price;
   var items = {};
+/*
   <% @cart.lineitems.each do |item| %>
     items['<%=item.product.id%>'] = 1;
   <% end %>
   console.log(items);
   console.log(total_price);
+*/
 
   $(document).ready(function(){
     $('.fa-times').click(function(){
@@ -93,18 +95,18 @@
       item_price = Number($('#item_price_'+item_id).val());
       item_value = Number($('#product_id_'+item_id).val());
 
-      if ( items['item_id'] < item_value ) {
+      if ( items[item_id] < item_value ) {
         total_price += item_price;
         console.log('PLUS'+ total_price);
-      } else if ( items['item_id'] > item_value ) {
+      } else if ( items[item_id] > item_value ) {
         total_price -= item_price;
         console.log('minus'+ total_price);
-      } else if ( items['item_id'] == 1 ){
+      } else if ( items[item_id] == 1 ){
         console.log( "@@@@@@ ALREADY Item value is 1 ");
       } else {
         console.log('something wrong');
       }
-      items['item_id'] = item_value;
+      items[item_id] = item_value;
 
       $('.total_price').empty(); 
       $('<li class="list-group-item important" id="total_price">' + 'Total: $' + total_price + '</li>').appendTo('.total_price');

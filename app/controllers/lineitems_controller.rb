@@ -21,12 +21,20 @@ class LineitemsController < ApplicationController
   end
 
   def update_all
+    @cart = current_cart
     items = params[:items]
-    items.each do |i,v|
-      item = Lineitem.find_by(id: i)
-      item.quantity = v
-      item.save
+    items.each do |k, v|
+      for i in 0..@cart.lineitems.length-1
+        k = k.to_i
+        v = v.to_i
+        if k == @cart.lineitems[i].product_id
+          tmp_item = Lineitem.find_by(product_id: k, cart_id: @cart.id)
+          tmp_item.quantity = v
+          tmp_item.save
+        end
+      end
     end
+
     redirect_to new_order_path
   end
 
@@ -42,8 +50,5 @@ class LineitemsController < ApplicationController
 
     def set_lineitem
       @lineitem = Lineitem.find(params[:id])
-    end
-
-    def update_params
     end
 end
